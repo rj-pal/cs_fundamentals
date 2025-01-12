@@ -4,6 +4,12 @@ def custom_sorted(iterable, sort_function):
         return None
     return sort_function.custom_sort(data)
 
+def custom_search(iterable, search_item, search_function):
+    data = make_list(iterable)
+    if not data:
+        return None
+    return search_function.search(data, search_item, 0, len(data) - 1)
+
 def make_list(iterable):
     try:
         iterable = list(iterable)
