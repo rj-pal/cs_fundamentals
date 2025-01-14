@@ -8,7 +8,7 @@ def custom_search(iterable, search_item, search_function):
     data = make_list(iterable)
     if not data:
         return None
-    return search_function.search(data, search_item, 0, len(data) - 1)
+    return search_function.search(data, search_item)
 
 def make_list(iterable):
     try:
