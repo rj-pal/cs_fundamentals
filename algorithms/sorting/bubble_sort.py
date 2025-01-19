@@ -16,7 +16,7 @@ def custom_sort(iterable):
                 print('Traceback (most recent call last):')
                 print('  File "algorithms/sorting/bubble_sort", line 10, in <module>')
                 print(f'Type Error: {e}')
-                return TypeError
+                raise TypeError
         c += 1      
     # print(n)
     return iterable

@@ -12,7 +12,7 @@ def custom_sort(iterable):
                 print('Traceback (most recent call last):')
                 print('  File "algorithms/sorting/insert_sort", line 6, in <module>')
                 print(f'Type Error: {e}')
-                return TypeError
+                raise TypeError
         else:
             iterable[0] = key
     return iterable

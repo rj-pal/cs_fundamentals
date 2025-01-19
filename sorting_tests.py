@@ -7,7 +7,7 @@ class TestSortFunction(unittest.TestCase):
 
     def setUp(self):
         """Set up the sort functions to test."""
-        self.sort_functions = [selection_sort, insert_sort, bubble_sort]
+        self.sort_functions = [selection_sort, insert_sort, bubble_sort, merge_sort]
 
     def test_empty_list(self):
         """Test sorting an empty list."""
@@ -121,12 +121,12 @@ class TestSortFunction(unittest.TestCase):
     def test_mixed_types(self):
         """Test sorting a list with mixed data types (should raise TypeError)."""
         test_input_data = [1, "one", 1.0]
-        expected_output = TypeError
+        # expected_output = TypeError
         for sort_function in self.sort_functions:
             with self.subTest(sort_function=sort_function.__name__):
-                self.assertEqual(custom_sorted(test_input_data, sort_function), expected_output)
-                # with self.assertRaises(TypeError):
-                #     custom_sorted(test_input_data, sort_function)
+                # self.assertEqual(custom_sorted(test_input_data, sort_function), expected_output)
+                with self.assertRaises(TypeError):
+                    custom_sorted(test_input_data, sort_function)
 
 if __name__ == "__main__":
     unittest.main()

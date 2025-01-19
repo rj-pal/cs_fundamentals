@@ -30,7 +30,7 @@ def search(iterable, search_item):
     """
     if not hasattr(iterable, "__iter__"):
         raise TypeError(f"'{type(iterable).__name__}' object is not iterable.")
-    
+    print(search_item)
     if not search_item:
         raise ValueError("The 'search_item' must contain at least one element.")
     
@@ -77,7 +77,7 @@ def custom_find(iterable, search_item):
     else:
         return -1
     
-a=custom_find(["aaa", "bbb", "b", "b", "b"], "bbb")
+# a=custom_find(["aaa", "bbb", "b", "b", "b"], "bbb")
 # a = search('ontario', 'ntooooooooo')
 # a = search(256,2)
-print(a)
+# print(a)
