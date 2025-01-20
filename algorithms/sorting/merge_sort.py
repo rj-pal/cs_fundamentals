@@ -1,7 +1,5 @@
 
 def merge_sorted_arrays(left, right):
-    print(left)
-    print(right)
     merged_array = [None] * (len(left) + len(right))
     pointer_left, pointer_right, merge_index = 0, 0, 0
     # Merge until one of the arrays is exhausted
@@ -41,7 +39,7 @@ def custom_merge(iterable, start, end):
 def custom_sort(iterable):
     return custom_merge(iterable, 0, len(iterable))
 
-
+# INPLACE MERGE SORT
 # def merge_sorted_arrays(iterable, start, mid, end, temp):
 #     # Use pointers for left and right subarrays
 #     pointer_left, pointer_right = start, mid
@@ -101,9 +99,6 @@ def custom_sort(iterable):
 
 #     return iterable
 
-
-
-
 # print(merge_sorted_arrays([1,3,5,7,9],[2,4,6,8,10,12,14,16,18]))
 # print(merge_sorted_arrays([5], [3]))
 # print(merge_sorted_arrays([], []))  # Output: []
@@ -114,7 +109,7 @@ def custom_sort(iterable):
 # print(custom_sort([3,6,3,56,3,6,3,7,]))
 # print(custom_sort([8,26,8,12,49,32,3,6,76,35]))
 
-# print(custom_sort([3]))
+# print(custom_sort([]))
 # print(custom_sort([2,3]))
 # print(custom_sort([8,3]))
 # print(custom_sort(["three",2]))

@@ -1,5 +1,5 @@
 from util import custom_sorted
-from algorithms.sorting import selection_sort, bubble_sort, insert_sort, merge_sort
+from algorithms.sorting import selection_sort, bubble_sort, insert_sort, merge_sort, quick_sort
 
 import unittest
 
@@ -7,7 +7,7 @@ class TestSortFunction(unittest.TestCase):
 
     def setUp(self):
         """Set up the sort functions to test."""
-        self.sort_functions = [selection_sort, insert_sort, bubble_sort, merge_sort]
+        self.sort_functions = [selection_sort, insert_sort, bubble_sort, merge_sort, quick_sort]
 
     def test_empty_list(self):
         """Test sorting an empty list."""

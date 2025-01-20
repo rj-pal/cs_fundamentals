@@ -1,4 +1,5 @@
-def niave_partition(iterable, pivot):
+# Niave partition
+def partition(iterable, pivot):
     left = []
     right = []
     pivot_point = iterable[pivot]
@@ -15,7 +16,7 @@ def niave_partition(iterable, pivot):
 
     return left, right
 
-def partition(iterable):
+def test_partition(iterable):
     pivot_index = len(iterable) // 2
     pivot_value = iterable[pivot_index]
     print(f"Pivot Value: {pivot_value}")
@@ -34,7 +35,6 @@ def partition(iterable):
     iterable[i] = pivot_value
     return iterable
 
-
 def custom_sort(iterable):
     if len(iterable) <= 1:
         return iterable
@@ -43,13 +43,15 @@ def custom_sort(iterable):
     pivot_value = iterable[pivot]
     return custom_sort(left) + [pivot_value] + custom_sort(right)
 
-print(partition([8, 2, 3, 2, 2, 1]))
-print(partition([2,5,16,6,19,9,1,25,35,4,5]))
-print(partition([12,4]))
-print(partition([4,4,4,4,4,4]))
+# print(partition([8, 2, 3, 2, 2, 1]))
+# print(partition([2,5,16,6,19,9,1,25,35,4,5]))
+# print(partition([12,4]))
+# print(partition([4,4,4,4,4,4]))
 
 # print(custom_sort([3,6,3,56,3,6,3,7,]))
 # print(custom_sort([8,26,8,12,49,32,3,6,76,35]))
+# print(custom_sort([4,4,4,4,4,4]))
+
 
 # print(custom_sort([3]))
 # print(custom_sort([2,3]))
