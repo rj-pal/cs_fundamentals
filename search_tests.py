@@ -1,7 +1,7 @@
 from util import custom_search
-from algorithms.search import binary_search, linear_search
+from algorithms.search import BinarySearch, LinearSearch
 
-search_functions = [binary_search, linear_search]
+search_functions = [BinarySearch, LinearSearch]
 sorted_list =[1,1,1,1,1,1,2,2,4,4,4,4,4,4,4]
 expected_result=[-1, 0, 6, -1, 8, -1]
 
@@ -21,12 +21,12 @@ string = "nsfw"
 def string_tests(string, search_function):
     c = 0
     for letter in string:
-        result = linear_search.search(string, letter)
+        result = LinearSearch.search(string, letter)
         assert result == c, f"Test Failed: Expected {c}, got {result}"
         c += 1
     print("String tests passed.")
 
-print(custom_search(sorted_list, 1, linear_search))
+print(custom_search(sorted_list, 1, LinearSearch))
 exit()
 sorted_list_test(sorted_list, expected_result, search_functions)
 # string_tests(string, linear_search.search)
