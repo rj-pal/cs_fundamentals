@@ -60,6 +60,31 @@ class LinkedList():
     def get_root(self):
         return self.root
     
+    def find_item(self, node: Node[T]):
+        head = self.get_root()
+        while head:
+            if head.value == node.value:
+                print(f"Node Value {node.value} found")
+                return True
+            else:
+                head = head.get_next()
+        print("Node not found")
+        return False
+    
+    def remove_item(self, node: Node[T]):
+        head = self.get_root()
+        while head:
+            if head.value == node.value:
+                print(f"Node Value {node.value} found")
+                head.get_next().set_previous(head.get_previous())
+                head.get_next().get_previous().set_next(head.get_next())
+                print("Node Value removed.")
+                return True
+            else:
+                head = head.get_next()
+        print("Node not found")
+        return False
+    
     def add_item(self, node: Node[T]):
         if not self.root:
             self.root = node
@@ -76,29 +101,33 @@ class LinkedList():
     def print_linked_list(self) -> None:
         if not self.root:
             return "The linked list is empty."
-        linkedlist = ''
         node = self.get_root()
         c = 1
         while node:
-            linkedlist += f"Node {c}: {node.value}\n"
+            print(f"Node {c}: {node.value}")
             node = node.get_next()
             c += 1
-        print(linkedlist)
-
 # Example Usage
 if __name__ == "__main__":
     node1 = Node(5)
     node2 = Node(10)
     node3 = Node(7)
+    node4 = Node(15)
 
     myList = LinkedList()
     myList.add_item(node1)
     myList.add_item(node2)
     myList.add_item(node3)
+    myList.add_item(node4)
 
     # # Print nodes
-    print(node1.value)  # Output: Node(5)
-    print(node1.get_next().value)  # Output: Node(10)
-    print(node2.get_previous().value)  # Output: Node(5)
+#     print(node1.value)  # Output: Node(5)
+#     print(node1.get_next().value)  # Output: Node(10)
+#     print(node2.get_previous().value)  # Output: Node(5)
     # print(node3.get_next().value)
     myList.print_linked_list()
+    myList.remove_item(Node(7))
+    myList.print_linked_list()
+#     myList.find_item(Node(7))
+#     myList.find_item(Node(15))
+#     myList.find_item(Node(23))
