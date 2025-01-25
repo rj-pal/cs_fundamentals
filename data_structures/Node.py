@@ -44,7 +44,15 @@ class Node(Generic[T]):
     #         return 1
     #     else:
     #         return 0
-    
+
+    # def __eq__(self, other: object) -> bool:
+    #     if not isinstance(other, Node):
+    #         return NotImplemented
+    #     return self.value == other.value
+
+    # def __lt__(self, other: 'Node[T]') -> bool:
+    #     return self.value < other.value
+
 
     def __str__(self):
         """Return a string representation of the node."""
@@ -59,31 +67,39 @@ class LinkedList():
 
     def get_root(self):
         return self.root
+
+    def get_size(self):
+        return self.size
     
     def find_item(self, node: Node[T]):
         head = self.get_root()
         while head:
             if head.value == node.value:
                 print(f"Node Value {node.value} found")
-                return True
+                return head
             else:
                 head = head.get_next()
         print("Node not found")
-        return False
+        return None
     
     def remove_item(self, node: Node[T]):
-        head = self.get_root()
-        while head:
-            if head.value == node.value:
-                print(f"Node Value {node.value} found")
-                head.get_next().set_previous(head.get_previous())
-                head.get_next().get_previous().set_next(head.get_next())
-                print("Node Value removed.")
-                return True
+        if (found_node := self.find_item(node)): # assign the node if found
+            if not found_node.get_previous():
+                self.root = self.root.get_next() 
+                self.root.set_previous(None)
+            elif not found_node.get_next():
+                self.tail = self.tail.get_previous()
+                self.tail.set_next(None)
             else:
-                head = head.get_next()
-        print("Node not found")
-        return False
+                found_node.get_next().set_previous(found_node.get_previous())
+                found_node.get_next().get_previous().set_next(found_node.get_next())
+            print("Node Value removed.")
+            
+            self.size -= 1
+            return True
+        else:
+            print("Node not found")
+            return found_node    
     
     def add_item(self, node: Node[T]):
         if not self.root:
@@ -100,9 +116,10 @@ class LinkedList():
     
     def print_linked_list(self) -> None:
         if not self.root:
-            return "The linked list is empty."
+            print("The linked list is empty.")
         node = self.get_root()
         c = 1
+        print(f"Linked List size {self.size}")
         while node:
             print(f"Node {c}: {node.value}")
             node = node.get_next()
@@ -113,21 +130,28 @@ if __name__ == "__main__":
     node2 = Node(10)
     node3 = Node(7)
     node4 = Node(15)
+    node5 = Node(25)
 
     myList = LinkedList()
     myList.add_item(node1)
     myList.add_item(node2)
     myList.add_item(node3)
     myList.add_item(node4)
+    myList.add_item(node5)
+    # myList.find_item(Node(10))
+    # myList.find_item(Node(45))
 
-    # # Print nodes
-#     print(node1.value)  # Output: Node(5)
-#     print(node1.get_next().value)  # Output: Node(10)
-#     print(node2.get_previous().value)  # Output: Node(5)
-    # print(node3.get_next().value)
+   
     myList.print_linked_list()
-    myList.remove_item(Node(7))
+    myList.remove_item(Node(25))
     myList.print_linked_list()
+    print(myList.tail)
+
+    # print(Node(4).value == Node(4).value)
+    # print(Node(4).__str__)
+    # print(Node(4).__str__)
+    # print(node4.__str__)
+    # print(node5.__str__)
 #     myList.find_item(Node(7))
 #     myList.find_item(Node(15))
 #     myList.find_item(Node(23))
