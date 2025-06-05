@@ -7,7 +7,7 @@ class Node(Generic[T]):
     A base class for a Node object.
 
     This class handles generic behavior for a Node object that can be used to 
-    implement Linked Lists, Ques or Stacks that follows basic conventions of 
+    implement Linked Lists, Ques or Stacks that follow the basic conventions of 
     setters and getters.
     """
 
@@ -28,11 +28,11 @@ class Node(Generic[T]):
 
     def get_next(self) -> Optional['Node[T]']:
         """Get the next node."""
-        return self.next #if self.next else 'None'
+        return self.next
 
     def get_previous(self) -> Optional['Node[T]']:
         """Get the previous node."""
-        return self.previous #if self.previous else 'None'
+        return self.previous 
     
     # def compare_to(self, node: Optional['Node[T]']) -> int:
     #     """Compare this node's value to another node's value."""
@@ -83,16 +83,20 @@ class LinkedList():
         return None
     
     def remove_item(self, node: Node[T]):
-        if (found_node := self.find_item(node)): # assign the node if found
-            if not found_node.get_previous():
+        if (found_node := self.find_item(node)): # assign the node if found or else will be false (None)
+            if not found_node.get_previous(): # case when head is removed
                 self.root = self.root.get_next() 
                 self.root.set_previous(None)
-            elif not found_node.get_next():
+            elif not found_node.get_next(): # case when tail is removed
                 self.tail = self.tail.get_previous()
                 self.tail.set_next(None)
             else:
-                found_node.get_next().set_previous(found_node.get_previous())
-                found_node.get_next().get_previous().set_next(found_node.get_next())
+                # get the next and previous nodes of the node to be removed
+                next_node = found_node.get_next() 
+                previous_node = found_node.get_previous()
+                # reset the node links
+                next_node.set_previous(previous_node)
+                previous_node.set_next(next_node)
             print("Node Value removed.")
             
             self.size -= 1
@@ -106,13 +110,12 @@ class LinkedList():
             self.root = node
             self.tail = node
             self.size += 1
-            return True
         else:
             self.tail.set_next(node)
             node.set_previous(self.tail)
             self.tail = node
             self.size += 1
-            return True
+        return True
     
     def print_linked_list(self) -> None:
         if not self.root:
@@ -121,16 +124,17 @@ class LinkedList():
         c = 1
         print(f"Linked List size {self.size}")
         while node:
-            print(f"Node {c}: {node.value}")
+            print(f"Node {c}: {node.value}, Type: {type(node.value)}")
             node = node.get_next()
             c += 1
-# Example Usage
+
 if __name__ == "__main__":
     node1 = Node(5)
     node2 = Node(10)
-    node3 = Node(7)
+    node3 = Node('7')
     node4 = Node(15)
     node5 = Node(25)
+    # print(node2)
 
     myList = LinkedList()
     myList.add_item(node1)
@@ -138,14 +142,19 @@ if __name__ == "__main__":
     myList.add_item(node3)
     myList.add_item(node4)
     myList.add_item(node5)
-    # myList.find_item(Node(10))
-    # myList.find_item(Node(45))
+    # ten = myList.find_item(Node(10))
+    # fourfive = myList.find_item(Node(45))
+    # print(fourfive)
+    # print(ten)
+
 
    
     myList.print_linked_list()
     myList.remove_item(Node(25))
     myList.print_linked_list()
-    print(myList.tail)
+    myList.remove_item(node3)
+    myList.print_linked_list()
+    # print(myList.tail)
 
     # print(Node(4).value == Node(4).value)
     # print(Node(4).__str__)
