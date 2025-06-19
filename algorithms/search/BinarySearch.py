@@ -13,8 +13,8 @@ def search(iterable, search_item):
         if not isinstance(search_item, type_of_first_item):
             raise TypeError(f"Search item type mismatch. Expected type '{type_of_first_item.__name__}', got '{type(search_item).__name__}' instead.")
     
-    return iterative_binary_search(iterable, search_item)
-    # return _binary_search(iterable, search_item, 0, len(iterable) - 1)
+    
+    return _binary_search(iterable, search_item, 0, len(iterable) - 1)
 
 
 def _binary_search(iterable, search_item, left, right):
@@ -31,7 +31,8 @@ def _binary_search(iterable, search_item, left, right):
     else:
         return _binary_search(iterable, search_item, left, pointer - 1)
 
-def iterative_binary_search(iterable, search_item):
+def _iterative_binary_search(iterable, search_item):
+    """Internal binary search function for iterables using iteartive method."""
     left = 0
     right = len(iterable) - 1
     result = -1
@@ -39,6 +40,7 @@ def iterative_binary_search(iterable, search_item):
         pointer = left + ((right - left) // 2)
         if iterable[pointer] == search_item:
             result = pointer
+            
             if pointer > 0 and iterable[pointer - 1] == search_item:
                 right  = pointer - 1
             else:
@@ -49,29 +51,6 @@ def iterative_binary_search(iterable, search_item):
             right = pointer - 1
     
     return result
-
-# Might be flaw in logic
-def iterative_binary_search_alt(iterable, search_item):
-    left = 0
-    right = len(iterable) - 1
-    while left <= right:
-        pointer = left + ((right - left) // 2)
-        if iterable[pointer] == search_item:
-            if pointer > 0 and iterable[pointer - 1] == search_item:
-                left = pointer - 2
-                right  = pointer
-            else:
-                return pointer         
-        elif iterable[pointer] < search_item:
-            left = pointer + 1
-        else:
-            right = pointer - 1   
-    return -1
-
-print(search([1,2,3,4,5,6,7,8], 4))
-print(search([1,2,3,4,5,6,7,8], 14))
-print(search([1,2,3,4,5,6,7,8,9,9,9,10,12], 9))
-print(search([1,2,3], 3))
 
 
 
