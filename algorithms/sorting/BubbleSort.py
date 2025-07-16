@@ -1,11 +1,21 @@
-def custom_sort(iterable):
+def custom_sort(iterable: list) -> list:
+    """
+    In-place implementation of Bubble Sort algorithm with sorted back-of-list optimization and boolean flag for indicating no swaps and sorting completion.
+
+    Args:
+        iterable: The list to be sorted.
+
+    Returns:
+        The sorted list (modified in-place).
+
+    Raises:
+        TypeError: If elements in the list are not comparable.
+    """
     c = 0
     swapped = True
-    # n=0
     while swapped:
-        swapped = not swapped
+        swapped = False
         for i in range(len(iterable) - 1 - c):
-            # n += 1
             try:
                 if iterable[i] <= iterable[i+1]:
                     pass
@@ -18,16 +28,46 @@ def custom_sort(iterable):
                 print(f'Type Error: {e}')
                 raise TypeError
         c += 1      
-    # print(n)
     return iterable
 
 
-def custom_sort_alt(iterable):
+def custom_sort_alternative(iterable: list) -> list:
+    """
+    In-place implementation of Bubble Sort algorithm with counter for indicating no swaps and sorting completion.
+
+    Args:
+        iterable: The list to be sorted.
+
+    Returns:
+        The sorted list (modified in-place), or empty list if elements are not comparable.
+    """
+    c = 1
+    while c != 0:
+        c = 0
+        for i in range(len(iterable) - 1):
+            try:
+                if iterable[i] <= iterable[i+1]:
+                    pass
+                else:
+                    iterable[i], iterable[i+1] = iterable[i+1], iterable[i] 
+            except TypeError as e:
+                print(f'Type Error: {e}')
+                return []   
+    return iterable
+
+def custom_sort_slow(iterable: list) -> list:
+    """
+    In-place implementation of an early break verion of Bubble Sort that exits loop early after one element position swap which adds extra compute time to sort.
+
+    Args:
+        iterable: The list to be sorted.
+
+    Returns:
+        The sorted list (modified in-place), or empty list if elements are not comparable.
+    """
     end = True
-    n = 0
     while end:
         for i in range(len(iterable)-1):
-            n += 1
             try:
                 if iterable[i] <= iterable[i+1]:
                     pass
@@ -39,25 +79,4 @@ def custom_sort_alt(iterable):
                 return []
         else:
             end = False
-    print(n)
-    return iterable
-
-def custom_sort_alt2(iterable):
-    c = 1
-    n = 0
-    while c != 0:
-        c = 0
-        n+=1
-        for i in range(len(iterable)-1):
-            n+=1
-            try:
-                if iterable[i] <= iterable[i+1]:
-                    pass
-                else:
-                    iterable[i], iterable[i+1] = iterable[i+1], iterable[i] 
-                    c += 1
-            except TypeError as e:
-                print(f'Type Error: {e}')
-                return []   
-    print(n)
     return iterable
