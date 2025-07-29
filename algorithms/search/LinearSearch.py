@@ -7,16 +7,14 @@ def search(iterable, search_element):
         Element to be searched 
         
     Returns:
-        Index of first occurance of search element, 0 for empthy string; otherwise -1
+        Index of first occurance of search element, 0 for empty string; otherwise -1
             
     Raises:
         TypeError: If the iterable object is not iterable
-
-    Returns the first the occurance of the search element, or 0 for empty string; otherwise -1 
     """
     if not hasattr(iterable, "__iter__"):
         raise TypeError(f"'{type(iterable).__name__}' object is not iterable.")
-    
+        
     if isinstance(iterable, str):
         return _linear_search_string(iterable, search_element)
     else:
@@ -33,7 +31,7 @@ def _linear_search(iterable, search_element):
     Returns:
         Index of first occurance of search element, or -1 if not found.
     
-    """    
+    """ 
     for i in range(len(iterable)):
         if iterable[i] == search_element:
             return i
